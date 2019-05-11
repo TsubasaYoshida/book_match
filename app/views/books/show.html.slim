@@ -1,4 +1,7 @@
-h1
-  | Book#show
-p
-  | Find me in app/views/book/show.html.erb
+.container
+
+  h1.mb-3
+    = @book.title
+    = @book.author
+
+  = link_to 'この本をいいね！しているユーザー', '#', class: "btn btn-outline-info d-block d-md-inline-block mb-2 mb-md-0", role: "button"
