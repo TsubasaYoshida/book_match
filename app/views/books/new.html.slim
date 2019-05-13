@@ -1,4 +1,6 @@
-h2
-  | 書籍情報作成
-= render 'form', book: @book
-= link_to '書籍情報一覧', books_url, class: 'btn btn-default'
+.container
+
+  h1.mb-3 書籍登録
+
+  .ml-1
+    = render 'form', book: @book
