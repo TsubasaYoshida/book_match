@@ -1,35 +1,26 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :update, :destroy]
 
   def index
     @books = Book.all
   end
 
   def show
+    @like_count = 20
+    @review_count = 10
   end
 
   def new
     @book = Book.new
   end
 
-  def edit
-  end
-
   def create
     @book = Book.new(book_params)
 
     if @book.save
-      redirect_to @book, notice: '書籍情報の作成に成功しました。'
+      redirect_to @book, notice: '書籍情報の登録に成功しました。'
     else
       render :new
-    end
-  end
-
-  def update
-    if @book.update(book_params)
-      redirect_to @book, notice: '書籍情報の更新に成功しました。'
-    else
-      render :edit
     end
   end
 
