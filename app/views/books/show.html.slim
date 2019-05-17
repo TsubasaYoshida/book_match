@@ -1,7 +1,43 @@
 .container
 
-  h1.mb-3
-    = @book.title
-    = @book.author
+  = @book.author
 
-  = link_to 'この本をいいね！しているユーザー', '#', class: "btn btn-outline-info d-block d-md-inline-block mb-2 mb-md-0", role: "button"
+  h1.mb-2
+    = @book.title
+
+  .mb-3.ml-2
+    p.mb-0 = "いいね：#{@like_count}"
+    p.mb-0 = "レビュー：#{@review_count}"
+
+  .mb-2
+    = link_to 'いいね！', '#', class: "btn btn-info d-block d-md-inline-block mb-2 mb-md-0", role: "button"
+
+  .mb-2
+    = link_to 'レビューを書く', '#', class: "btn btn-success d-block d-md-inline-block mb-2 mb-md-0", role: "button"
+
+  .border-top.my-3
+
+  .mb-2
+    = link_to '購入する', '#', class: "btn btn-outline-danger d-block d-md-inline-block mb-2 mb-md-0", role: "button"
+
+  .mb-4
+    = link_to 'いいね！しているユーザー', '#', class: "btn btn-outline-info d-block d-md-inline-block mb-2 mb-md-0", role: "button"
+
+  h2.mb-2 レビュー
+
+  - @book.reviews.each_with_index do |review, i|
+    .card.mb-2
+      .card-body
+        .card-text
+          .row
+            .col-sm-1.mb-2.mb-sm-0
+              = link_to "@#{review.user.user_code}", review.user
+            .col-sm-11
+              div*{id: "article_#{i + 1}"}
+                = review.article
+              .pointer*{id: "expand_#{i + 1}"} style='color: #fd7e14' onclick='expand_article(#{i + 1})'
+                | 続きを読む
+  end
+
+  .mb-2
+    = link_to 'もっとレビューを読む', '#', class: "btn btn-outline-success d-block d-md-inline-block mb-2 mb-md-0", role: "button"
