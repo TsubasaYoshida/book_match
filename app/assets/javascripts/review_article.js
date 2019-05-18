@@ -1,6 +1,6 @@
 var article_array = []
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('turbolinks:load', function () {
     for (var i = 1; true; i++) {
         element = document.getElementById(`article_${i}`)
         if (element != null) {
