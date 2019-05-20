@@ -25,19 +25,21 @@
 
   h2.mb-2 レビュー
 
-  - @book.reviews.each_with_index do |review, i|
-    .card.mb-2
-      .card-body
-        .card-text
-          .row
-            .col-sm-1.mb-2.mb-sm-0
-              = link_to "@#{review.user.user_code}", review.user
-            .col-sm-11
-              div*{id: "article_#{i + 1}"}
-                = review.article
-              .pointer*{id: "expand_#{i + 1}"} style='color: #fd7e14' onclick='expand_article(#{i + 1})'
-                | 続きを読む
-  end
+  - if @book.reviews.size == 0
+    .mb-2.ml-2 まだレビューは投稿されていません。
+  - else
+    - @book.reviews.limit(5).each_with_index do |review, i|
+      .card.mb-2
+        .card-body
+          .card-text
+            .row
+              .col-sm-1.mb-2.mb-sm-0
+                = link_to "@#{review.user.user_code}", review.user
+              .col-sm-11
+                div*{id: "article_#{i + 1}"}
+                  = review.article
+                .pointer*{id: "expand_#{i + 1}"} style='color: #fd7e14' onclick='expand_article(#{i + 1})'
+                    | 続きを読む
 
-  .mb-2
-    = link_to 'もっとレビューを読む', '#', class: "btn btn-outline-success d-block d-md-inline-block mb-2 mb-md-0", role: "button"
+    .mb-2.d-flex.justify-content-end
+      = link_to 'もっとレビューを読む', '#', class: "btn btn-outline-success d-block d-md-inline-block mb-2 mb-md-0", role: "button"
