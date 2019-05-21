@@ -5,6 +5,16 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def narrow
+    if params[:author].blank?
+      @books = Book.all
+    else
+      @author = params[:author]
+      @books = Book.where(author: @author)
+    end
+    render :index
+  end
+
   def show
     @like_count = 20
     @review_count = 10

@@ -2,13 +2,24 @@
 
   h1.mb-3 書籍一覧
 
-  table.table.table-bordered.table-hover
-    thead.thead-light
-      tr
-        th タイトル
-        th 著者
-    tbody
-      - @books.each do |book|
-        tr.pointer onclick='window.location="/books/#{book.id}"' role="link"
-          td = book.title
-          td = book.author
+  - if @author.present?
+    .mb-2 style="color: #fd7e14"
+      | 著者：
+      strong = @author
+      |  で絞り込み中
+
+  - if @books.size > 0
+    table.table.table-bordered
+      thead.thead-light
+        tr
+          th タイトル
+          th 著者
+      tbody
+        - @books.each do |book|
+          tr
+            td.pointer onclick='window.location="/books/#{book.id}"' role="link"
+              = book.title
+            td.pointer onclick='window.location="#{narrow_books_path(author: book.author)}"' role="link"
+              = book.author
+  - else
+    .mt-5.text-center 該当のデータはございません。
