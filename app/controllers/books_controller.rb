@@ -7,25 +7,22 @@ class BooksController < ApplicationController
   end
 
   def narrow
-    if params[:author].blank?
-      @books = Book.all
-    else
-      @author = params[:author]
-      @books = Book.where(author: @author)
-    end
+    narrow_by_author
     render :index
   end
 
   def sort
+    narrow_by_author
+
     if params[:created_at].present?
       @created_at_num = params[:created_at].to_i
 
       if @created_at_num == 0
-        @books = Book.order(created_at: :DESC)
+        @books = @books.order(created_at: :DESC)
         @created_at = '登録日時▼'
         @created_at_num = 1
       else
-        @books = Book.order(created_at: :ASC)
+        @books = @books.order(created_at: :ASC)
         @created_at = '登録日時▲'
         @created_at_num = 0
       end
@@ -34,17 +31,15 @@ class BooksController < ApplicationController
       @updated_at_num = params[:updated_at].to_i
 
       if @updated_at_num == 0
-        @books = Book.order(updated_at: :DESC)
+        @books = @books.order(updated_at: :DESC)
         @updated_at = '更新日時▼'
         @updated_at_num = 1
       else
-        @books = Book.order(updated_at: :ASC)
+        @books = @books.order(updated_at: :ASC)
         @updated_at = '更新日時▲'
         @updated_at_num = 0
       end
 
-    else
-      @books = Book.all
     end
     render :index
   end
@@ -88,5 +83,14 @@ class BooksController < ApplicationController
     @updated_at = '更新日時△'
     @created_at_num = 0
     @updated_at_num = 0
+  end
+
+  def narrow_by_author
+    if params[:author].blank?
+      @books = Book.all
+    else
+      @author = params[:author]
+      @books = Book.where(author: @author)
+    end
   end
 end
