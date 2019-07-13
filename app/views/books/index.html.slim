@@ -14,9 +14,9 @@
         tr
           th タイトル
           th 著者
-          th.pointer onclick='window.location="#{sort_books_path(created_at: @created_at)}"' role="link"
+          th.pointer onclick='window.location="#{sort_books_path(created_at: @created_at_num)}"' role="link"
             = @created_at
-          th.pointer onclick='window.location="#{sort_books_path(updated_at: @updated_at)}"' role="link"
+          th.pointer onclick='window.location="#{sort_books_path(updated_at: @updated_at_num)}"' role="link"
             = @updated_at
       tbody
         - @books.each do |book|

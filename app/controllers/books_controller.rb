@@ -18,25 +18,29 @@ class BooksController < ApplicationController
 
   def sort
     if params[:created_at].present?
-      @created_at = params[:created_at]
+      @created_at_num = params[:created_at].to_i
 
-      if @created_at == '登録日時▲' || @created_at == '登録日時△'
+      if @created_at_num == 0
         @books = Book.order(created_at: :DESC)
         @created_at = '登録日時▼'
+        @created_at_num = 1
       else
         @books = Book.order(created_at: :ASC)
         @created_at = '登録日時▲'
+        @created_at_num = 0
       end
 
     elsif params[:updated_at].present?
-      @updated_at = params[:updated_at]
+      @updated_at_num = params[:updated_at].to_i
 
-      if @updated_at == '更新日時▲' || @updated_at == '更新日時△'
+      if @updated_at_num == 0
         @books = Book.order(updated_at: :DESC)
         @updated_at = '更新日時▼'
+        @updated_at_num = 1
       else
         @books = Book.order(updated_at: :ASC)
         @updated_at = '更新日時▲'
+        @updated_at_num = 0
       end
 
     else
@@ -82,5 +86,7 @@ class BooksController < ApplicationController
   def set_variable
     @created_at = '登録日時△'
     @updated_at = '更新日時△'
+    @created_at_num = 0
+    @updated_at_num = 0
   end
 end
