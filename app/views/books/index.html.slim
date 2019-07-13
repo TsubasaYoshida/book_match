@@ -14,6 +14,10 @@
         tr
           th タイトル
           th 著者
+          th.pointer onclick='window.location="#{sort_books_path(created_at: @created_at)}"' role="link"
+            = @created_at
+          th.pointer onclick='window.location="#{sort_books_path(updated_at: @updated_at)}"' role="link"
+            = @updated_at
       tbody
         - @books.each do |book|
           tr
@@ -21,5 +25,9 @@
               = book.title
             td.pointer onclick='window.location="#{narrow_books_path(author: book.author)}"' role="link"
               = book.author
+            td
+              = book.created_at
+            td
+              = book.updated_at
   - else
     .mt-5.text-center 該当のデータはございません。
