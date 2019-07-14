@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :update, :destroy]
   before_action :set_variable, only: [:index, :narrow, :sort]
-  after_action :page_by_kaminari, only: [:index, :narrow, :sort]
 
   PER = 2
 
