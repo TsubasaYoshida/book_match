@@ -35,3 +35,22 @@ h2 {
 .pointer {
   cursor: pointer;
 }
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #666666;
+  border-color: #666666;
+}
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:link {
+  color: #666666;
+  text-decoration: none;
+}
+
+.pagination {
+  justify-content: center;
+}
