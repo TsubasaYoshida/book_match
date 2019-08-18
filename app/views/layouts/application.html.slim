@@ -35,7 +35,17 @@ html
               li.nav-item
                 = link_to '書籍登録', new_book_path, class: 'nav-link'
               li.nav-item
-                = link_to 'マイページ', '#', class: 'nav-link'
+                = link_to 'マイページ', '#', class: 'nav-link mr-2'
+              .d-none.d-sm-block
+                li.nav-item
+                  = form_with(class: 'form-inline') do |form|
+                    = form.text_field :title, class: 'form-control mr-2', placeholder: '検索...'
+                    = form.submit '検索', class: 'btn btn-outline-info'
+              .d-sm-none.d-block
+                li.nav-item
+                  = form_with do |form|
+                    = form.text_field :title, class: 'form-control mr-2 mt-2', placeholder: '検索...'
+                    = form.submit '検索', class: 'btn btn-outline-info mt-2'
     main
       = yield
     footer.text-center.my-5
