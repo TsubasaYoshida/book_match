@@ -2,10 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :update, :destroy]
   before_action :set_variable, only: [:index, :narrow, :sort]
 
-  PER = 2
-
   def index
-    @books = Book.page(params[:page]).per(PER)
   end
 
   def narrow
@@ -101,4 +98,5 @@ class BooksController < ApplicationController
   def page_by_kaminari
     @books = @books.page(params[:page]).per(PER)
   end
+
 end
