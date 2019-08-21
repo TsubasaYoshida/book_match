@@ -2,6 +2,11 @@
 
   h1.mb-3 書籍一覧
 
+  - if params[:q].present?
+    - if params[:q][:title_cont].present?
+      .mb-2.ml-2
+        = "#{params[:q][:title_cont]} の検索結果"
+
   - if @author.present?
     .mb-2 style="color: #fd7e14"
       | 著者：
